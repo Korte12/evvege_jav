@@ -60,7 +60,13 @@ document.body.appendChild(table);
 function ujHozzadas(adat) {
     const sor = document.createElement('tr');
     sor.className = 'uj-sor';
-    
+
+    const korszakListaTomb = adat.korszaklista
+        .split(',')
+    if (adat.korszakokszama === korszakListaTomb.length) {
+        sor.style.backgroundColor = 'lightgreen';
+    }
+
     const koltoCella = document.createElement('td');
     koltoCella.textContent = adat.kolto;
     sor.appendChild(koltoCella);
@@ -70,7 +76,7 @@ function ujHozzadas(adat) {
     sor.appendChild(korszakCella);
 
     const korszakListaja = document.createElement('td');
-    korszakListaja.textContent = adat.korszaklista.split(',').map(e => e.trim()).join(' | ');
+    korszakListaja.textContent = korszakListaTomb.join(' | ');
     sor.appendChild(korszakListaja);
 
     tbody.appendChild(sor);
