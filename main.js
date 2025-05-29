@@ -54,5 +54,42 @@ mainButton.innerHTML = "Küldés";
 mainButton.className = "gomb";
 form.appendChild(mainButton);
 
-document.body.appendChild(form);
+document.body.appendChild(form); 
 document.body.appendChild(table);
+
+function ujHozzadas(adat) {
+    const sor = document.createElement('tr');
+    sor.className = 'uj-sor';
+    
+    const koltoCella = document.createElement('td');
+    koltoCella.textContent = adat.kolto;
+    sor.appendChild(koltoCella);
+
+    const korszakCella = document.createElement('td');
+    korszakCella.textContent = adat.korszakokszama;
+    sor.appendChild(korszakCella);
+
+    const korszakListaja = document.createElement('td');
+    korszakListaja.textContent = adat.korszaklista.split(',').map(e => e.trim()).join(' | ');
+    sor.appendChild(korszakListaja);
+
+    tbody.appendChild(sor);
+}
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault(); 
+
+    const koltoNeve = document.getElementById("kolto_nev").value.trim();
+    const korszakSzam = parseInt(document.getElementById("korszak_szam").value);
+    const korszakLista = document.getElementById("korszak_lista").value.trim();
+
+    const data = {
+        kolto: koltoNeve,
+        korszakokszama: korszakSzam,
+        korszaklista: korszakLista
+    }
+
+    array.push(data);
+    ujHozzadas(data);
+    form.reset();
+});

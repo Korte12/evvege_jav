@@ -6,7 +6,11 @@ table, th, td {
 
     table {
       margin-top: 20px;
-      background-color: #d4edda; /* világos zöld */
+      background-color: #00ff3c; 
+    }
+
+    .uj-sor {
+    background-color: #b2f2bb;
     }
 
     .div {
