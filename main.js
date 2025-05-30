@@ -61,12 +61,11 @@ function ujHozzadas(adat) {
     const sor = document.createElement('tr');
     sor.className = 'uj-sor';
 
-    const korszakListaTomb = adat.korszaklista
-        .split(',')
+    const korszakListaTomb = adat.korszaklista.split(',')
+
     if (adat.korszakokszama === korszakListaTomb.length) {
         sor.style.backgroundColor = 'lightgreen';
     }
-
     const koltoCella = document.createElement('td');
     koltoCella.textContent = adat.kolto;
     sor.appendChild(koltoCella);
@@ -103,7 +102,6 @@ form.addEventListener('submit', function(e) {
 
 const br = document.createElement('br');
 document.body.appendChild(br)
-
 
 const tbody2 = document.createElement('tbody');
 document.body.appendChild(tbody2);
@@ -144,12 +142,16 @@ const file = e.target.files[0];
             if (!trimmedLine) continue; 
  
             const fields = trimmedLine.split(';');
+            if (fields.length < 3) continue;
+
             const data = {
-                kolto: fields[0],
+                kolto: fields[0].trim(),
                 korszakokszama: parseInt(fields[1]),
-                korszaklista: fields[2]
+                korszaklista: fields[2].trim()
             };
- 
+
+            if (!data.kolto || isNaN(data.korszakokszama) || !data.korszaklista) continue;
+
             array.push(data);
             ujHozzadas(data);
         }
